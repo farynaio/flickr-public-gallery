@@ -1,5 +1,5 @@
 {
-  "name": "webpack2",
+  "name": "flickr-public-gallery",
   "version": "1.0.0",
   "description": "Simple Flickr public gallery with infinite scroll.",
   "author": "Adam Faryna <adamfaryna@appdy.net>",
