@@ -17,7 +17,9 @@
     "redux",
     "redux-saga",
     "webpack",
-    "sass"
+    "sass",
+    "tdd",
+    "bdd"
   ],
   "devDependencies": {
     "babel-core": "^6.26.0",
