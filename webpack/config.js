@@ -11,14 +11,14 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, '../dist')
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules|dist|webpack)/,
-        use: { loader: 'babel-loader', options: { presets: 'env' } },
+        exclude: /(node_modules|dist)/,
+        use: { loader: 'babel-loader', options: { presets: [ 'es2015', 'react' ] }},
       },
       {
         test: /\.scss$/,
@@ -29,5 +29,8 @@ module.exports = {
         ]
       }
     ]
+  },
+  resolve: {
+    extensions: [ '.js', '.jsx', '.scss' ]
   }
 };

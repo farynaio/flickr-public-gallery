@@ -3,10 +3,13 @@
  *
  * Distributed under terms of the BSD 2-Clause license.
  */
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const SwigWebpackPlugin = require('swig-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const config = require('./webpack.base.config.js');
+const config = require('./webpack/config.js');
+
+config.devtool = 'source-map';
 
 config.plugins = [
   new webpack.optimize.UglifyJsPlugin({
@@ -20,14 +23,13 @@ config.plugins = [
     allChunks: true
   })
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': 'production'
+    'process.env.NODE_ENV': "'production'"
   }),
-  new SwigWebpackPlugin({
-    beautify: true,
-    data: {
-      cdn: ''
-    }
-  })
-]
+  new HtmlWebpackPlugin({
+    template: './src/index.html',
+    filename: 'index.html',
+    inject: 'body'
+  }),
+];
 
 module.exports = config;
