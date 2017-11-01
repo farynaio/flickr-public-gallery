@@ -11,8 +11,9 @@ import * as actions from '../actions';
 
 export function* fetchFeed() {
   try {
-    const feed = yield call(Api.fetchFeed);
-    yield put(actions.fetchFeedSuccess(feed));
+    const response = yield call(Api.fetchFeed);
+    if (response.error) throw response.error;
+    yield put(actions.fetchFeedSuccess(response.data));
   } catch (err) {
     yield put(actions.fetchFeedFail(err));
   }

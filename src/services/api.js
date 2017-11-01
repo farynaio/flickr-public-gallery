@@ -11,7 +11,7 @@ class Api {
   jsonp(path, options) {
     return new Promise(
       (resolve, reject) => jsonp(`${API_BASE}path`, options,
-        (err, data) => err ? reject(err) : resolve(data)));
+        (err, data) => err ? reject({ error }) : resolve({ data })));
   }
 
   fetchFeed() {
