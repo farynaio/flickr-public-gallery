@@ -3,17 +3,17 @@
  *
  * Distributed under terms of the BSD 2-Clause license.
  */
-import actions from '../actions';
+import * as actions from '../actions';
 
 const INIT_STATE = {
-  feed: []
+  feed: new Set()
 };
 
 const handlers = {
-  [actions.FETCH_FEED]: (state, action) => { ...state, feed: [ ...state.feed, ...action.payload.feed ] }
+  [actions.FETCH_FEED_SUCCESS]: (state, action) => action.payload.forEach(item => state.feed.add(item))
 };
 
-const reducer(state=INIT_STATE, action) {
+function reducer(state=INIT_STATE, action) {
   const handler = handlers[action.type];
   if (handler) return handler(state, action);
   return state;

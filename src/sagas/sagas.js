@@ -3,7 +3,7 @@
  *
  * Distributed under terms of the BSD 2-Clause license.
  */
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 
 import Api from '../services/api';
 
@@ -19,6 +19,14 @@ export function* fetchFeed() {
   }
 }
 
+export function* lazyFetchFeed() {
+  const { feed } = yield select;
+  if (!feed.size) {
+    yield call(fetchFeed);
+  }
+}
+
 export default function* rootSaga() {
   yield takeEvery(actions.FETCH_FEED, fetchFeed);
+  yield takeLatest(action.LAZY_FETCH_FEED, lazyFetchFeed);
 }

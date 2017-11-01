@@ -6,7 +6,8 @@
 import sagas from './sagas';
 
 export {
-  fetchFeed
+  fetchFeed,
+  lazyFetchFeed
 } from './sagas';
 
 export default sagas;

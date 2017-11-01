@@ -6,20 +6,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import StreamItem from './StreamItem'
+
 class FeedLoader extends Component {
-  // static get defaultProps = {
-  // }
-  //
-  // static propTypes = {
-  //   ...Component.defaultProps,
-  // }
+  static defaultProps = {
+    items: []
+  }
+
+  static propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object),
+    fetchFeed: PropTypes.func.isRequired
+  }
+
+  componentWillMount() {
+    this.props.fetchFeed();
+  }
 
   render() {
-    const {} = this.props;
+    const { items } = this.props;
+    const childs = items.map( item => <StreamItem {...item} />);
 
     return (
-      <div className=''>
-
+      <div className='feed-loader'>
+        {childs}
       </div>
     );
   };

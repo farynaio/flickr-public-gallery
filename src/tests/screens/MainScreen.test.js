@@ -6,7 +6,7 @@
 import React from 'react';
 
 import MainScreen from '../../screens/MainScreen';
-import FeedLoader from '../../components/FeedLoader';
+import FeedLoader from '../../containers/ConnectedFeedLoader';
 
 describe('MainScreen', () => {
   let wrapper;

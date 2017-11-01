@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import FeedLoader from '../components/FeedLoader';
+import FeedLoader from '../containers/ConnectedFeedLoader';
 
 class MainScreen extends Component {
   render() {
