@@ -30,6 +30,14 @@ config.plugins = [
   new webpack.HotModuleReplacementPlugin(),
 ];
 
+config.module.rules.push({
+  test: /\.(jpe?g|png|gif|svg)$/i,
+  use: [
+    'url-loader?limit=10000',
+    'img-loader'
+  ]
+});
+
 config.devServer = {
   contentBase: path.resolve(__dirname, '../dist'),
   watchContentBase: true,
