@@ -9,7 +9,7 @@ import createSagaMiddleware from 'redux-saga';
 import reducer from '../reducers';
 import sagas from '../sagas';
 
-export default function createStore(initialData) {
+export default function configureStore(initialData) {
   const sagaMiddleware = createSagaMiddleware();
   let middleware = applyMiddleware(
     sagaMiddleware
@@ -17,5 +17,5 @@ export default function createStore(initialData) {
 
   sagaMiddleware.run(sagas);
 
-  return createStore(middleware);
+  return configureStore(middleware);
 };
