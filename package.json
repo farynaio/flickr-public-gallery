@@ -8,7 +8,7 @@
     "start": "npm run dev",
     "dev": "webpack-dev-server --progress --config webpack.dev.config.js",
     "prod": "webpack --progress --config webpack.prod.config.js",
-    "test": "mocha --require tests/setup.js --recursive src/tests/**/*.test.js",
+    "test": "nyc mocha --require tests/setup.js --recursive src/tests/**/*.test.js",
     "test:watch": "mocha --require tests/setup.js -w --recursive src/tests/**/*.test.js"
   },
   "keywords": [
@@ -35,6 +35,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^2.30.1",
     "mocha": "^4.0.1",
+    "nyc": "^11.2.1",
     "react-test-renderer": "^16.0.0",
     "sass-loader": "^6.0.6",
     "script-loader": "^0.7.2",

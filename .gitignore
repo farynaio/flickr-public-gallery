@@ -2,3 +2,5 @@ node_modules
 dist
 Session.vim
 tags
+.nyc_output
+coverage
