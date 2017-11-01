@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import ItemPhoto from './ItemPhoto';
 import Tags from './Tags';
 
-const StreamItem = (props) => (
+const StreamItem = props => (
   <div className='stream-item'>
     <ItemPhoto {...props} />
     <p className='stream-item__description'>{props.description}</p>
