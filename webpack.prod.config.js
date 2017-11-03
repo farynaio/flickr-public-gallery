@@ -10,6 +10,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('./webpack/config.js');
 
 config.devtool = 'source-map';
+config.entry = [
+  './src/index.js'
+];
 
 config.plugins = [
   new webpack.optimize.UglifyJsPlugin({
@@ -21,7 +24,7 @@ config.plugins = [
   new ExtractTextPlugin({
     filename: 'build.min.css',
     allChunks: true
-  })
+  }),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': "'production'"
   }),
@@ -33,34 +36,9 @@ config.plugins = [
 ];
 
 config.module.rules.push({
-  test: /\.(jpe?g|png|gif|svg)$/i,
-  use: [
-    'url-loader?limit=10000',
-    {
-      loader: 'img-loader',
-      options: {
-        enabled: process.env.NODE_ENV === 'production',
-        gifsicle: {
-          interlaced: false
-        },
-        mozjpeg: {
-          progressive: true,
-          arithmetic: false
-        },
-        optipng: false, // disabled
-        pngquant: {
-          floyd: 0.5,
-          speed: 2
-        },
-        svgo: {
-          plugins: [
-            { removeTitle: true },
-            { convertPathData: false }
-          ]
-        }
-      }
-    }
-  ]
+  test: /\.jsx?$/,
+  exclude: /node_modules/,
+  use: 'babel-loader'
 });
 
 module.exports = config;

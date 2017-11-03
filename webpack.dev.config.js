@@ -14,6 +14,9 @@ const config = require('./webpack/config.js');
 config.devtool = 'cheap-eval-source-map';
 
 config.plugins = [
+  new webpack.LoaderOptionsPlugin({
+    debug: true
+  }),
   new ExtractTextPlugin({
     filename: 'build.min.css',
     allChunks: true
@@ -27,15 +30,22 @@ config.plugins = [
     inject: 'body'
   }),
   new DashboardPlugin(),
+	new webpack.NamedModulesPlugin(),
   new webpack.HotModuleReplacementPlugin(),
 ];
 
 config.module.rules.push({
-  test: /\.(jpe?g|png|gif|svg)$/i,
-  use: [
-    'url-loader?limit=10000',
-    'img-loader'
-  ]
+	test: /\.jsx?$/,
+	include: path.resolve(__dirname, 'src'),
+	use: {
+		loader: 'babel-loader',
+		options: {
+			babelrc: false,
+			cacheDirectory: true,
+			presets: [ 'env', 'react', 'stage-0' ],
+			plugins: [ 'transform-runtime', 'react-hot-loader/babel' ]
+		}
+  }
 });
 
 config.devServer = {

@@ -21,3 +21,5 @@ global.mount = enzyme.mount;
 global.render = enzyme.render;
 global.spy = sinon.spy;
 global.stub = sinon.stub;
+
+['.jpeg', '.jpg', '.png', '.gif', '.svg', '.css', '.scss'].forEach(item => require.extensions[item] = () => null);
