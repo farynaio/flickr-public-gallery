@@ -6,6 +6,7 @@
 
 require('babel-register');
 require('babel-polyfill');
+require('source-map-support/register');
 
 const chai = require('chai');
 const Adapter = require('enzyme-adapter-react-16');
