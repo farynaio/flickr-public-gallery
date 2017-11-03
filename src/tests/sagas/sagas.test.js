@@ -6,7 +6,7 @@
 import { call, put, select } from 'redux-saga/effects';
 import { fetchFeed, lazyFetchFeed } from '../../sagas';
 
-import * as actions from '../../actions';
+import actions from '../../actions';
 import Api from '../../services/api';
 
 describe('sagas', () => {
@@ -52,13 +52,13 @@ describe('sagas', () => {
     });
 
     it('should call fetchFeed if feed collection in store is empty', () => {
-      expect(gen.next().value).to.be.deep.equal(select);
+      expect(gen.next().value).to.be.deep.equal(select());
       expect(gen.next({ feed: new Set() }).value).to.be.deep.equal(call(fetchFeed));
       expect(gen.next().done).to.be.true;
     });
 
     it('should not call any effect if feed collection is not empty', () => {
-      expect(gen.next().value).to.be.deep.equal(select);
+      expect(gen.next().value).to.be.deep.equal(select());
       expect(gen.next({ feed: new Set(['a', 'b']) }).done).to.be.true;
     });
   });
