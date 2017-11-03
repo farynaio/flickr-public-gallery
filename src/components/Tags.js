@@ -7,7 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Tags = ({ tags }) => {
-  const tagsElements = tags.map(tag => <div className='tags__tag'>{tag}</div>);
+  const tagsElements = tags.map((tag, idx) => <div key={idx} className='tags__tag'>{tag}</div>);
 
   return (
     <div className='tags'>

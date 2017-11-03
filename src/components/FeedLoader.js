@@ -24,7 +24,7 @@ class FeedLoader extends Component {
 
   render() {
     const { items } = this.props;
-    const childs = items.map( item => <StreamItem {...item} />);
+    const childs = items.map( (item, idx) => <StreamItem key={idx} {...item} />);
 
     return (
       <div className='feed-loader'>

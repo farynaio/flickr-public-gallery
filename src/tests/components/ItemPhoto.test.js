@@ -17,9 +17,6 @@ let props = {
 describe('ItemPhoto', () => {
   let wrapper;
 
-  before(() => {
-  });
-
   beforeEach(() => {
     wrapper = shallow(<ItemPhoto {...props} />);
   });

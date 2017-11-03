@@ -33,11 +33,11 @@ describe('FeedLoader', () => {
   });
 
   it('should not render any elements for not specified prop "item"', () => {
-    expect(shallow(<FeedLoader fetchFeed={()=>({})} />).children()).to.have.length(0);
+    expect(shallow(<FeedLoader fetchFeed={function(){}} />).children()).to.have.length(0);
   });
 
   it('should render 5 elements StreamItems for 5 items in props', () => {
-    const expected = items.map( item => <StreamItem {...item} />);
-    expect(shallow(<FeedLoader fetchFeed={()=>({})} items={items} />).containsAllMatchingElements(expected)).to.be.true;
+    const expected = items.map( (item, idx) => <StreamItem key={idx} {...item} />);
+    expect(shallow(<FeedLoader fetchFeed={function(){}} items={items} />).containsAllMatchingElements(expected)).to.be.true;
   });
 });

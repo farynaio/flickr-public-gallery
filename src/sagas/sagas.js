@@ -6,8 +6,7 @@
 import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
 
 import Api from '../services/api';
-
-import * as actions from '../actions';
+import actions from '../actions';
 
 export function* fetchFeed() {
   try {
@@ -20,7 +19,7 @@ export function* fetchFeed() {
 }
 
 export function* lazyFetchFeed() {
-  const { feed } = yield select;
+  const { feed } = yield select();
   if (!feed.size) {
     yield call(fetchFeed);
   }
@@ -28,5 +27,5 @@ export function* lazyFetchFeed() {
 
 export default function* rootSaga() {
   yield takeEvery(actions.FETCH_FEED, fetchFeed);
-  yield takeLatest(action.LAZY_FETCH_FEED, lazyFetchFeed);
+  yield takeLatest(actions.LAZY_FETCH_FEED, lazyFetchFeed);
 }

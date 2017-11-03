@@ -15,7 +15,9 @@ export default function configureStore(initialData) {
     sagaMiddleware
   );
 
+  const store = createStore(reducer, middleware);
+
   sagaMiddleware.run(sagas);
 
-  return configureStore(middleware);
+  return store;
 };

@@ -5,15 +5,15 @@
  */
 import { connect } from 'react-redux';
 
-import * as actions from '../actions';
+import actions from '../actions';
 import FeedLoader from '../components/FeedLoader';
 
 const mapStateToProps = state => ({
-  items: state.feed
+  items: Array.from(state.feed.values())
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchFeed: () => dispatch(lazyFetchFeed())
+  fetchFeed: () => dispatch(actions.lazyFetchFeed())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedLoader);
