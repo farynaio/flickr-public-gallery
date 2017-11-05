@@ -47,7 +47,7 @@ config.module.rules.push({
 	test: /\.scss$/,
 	use: extractSass.extract({
 		use: [
-			{ loader: 'css-loader', options: { modules: true } },
+			{ loader: 'css-loader', options: { modules: false } },
 			{
 				loader: 'sass-loader',
 				options: {
