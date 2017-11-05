@@ -48,14 +48,14 @@ class FeedLoader extends Component {
     const that = this;
 		const { fetchFeed } = this.props;
 
-		let listener = document.getElementById('root') || document.body;
-
     function shouldFetchMoreData() {
-      return this.node.scrollHeight - listener.scrollTop - listener.clientHeight >= -100;
+      if (!this.items.lastElementChild) return true;
+      const itemRect = this.items.lastElementChild.getBoundingClientRect();
+      return itemRect.y - 4 * itemRect.height <= 0;
     }
 
 		this.observables.scroll = Observable.fromEvent(window, 'scroll')
-			.debounceTime(300)
+			.debounceTime(500)
       .filter(shouldFetchMoreData.bind(this));
 
     this.subscriptions.scroll = this.observables.scroll
@@ -73,8 +73,10 @@ class FeedLoader extends Component {
     const childs = items.map( (item, idx) => <StreamItem key={idx} {...item} />);
 
     return (
-      <div className='feed-loader' ref={ node => this.node = node }>
-        {childs}
+      <div className='feed-loader'>
+        <div className='feed-loader__items' ref={ node => this.items = node }>
+          {childs}
+        </div>
 				{isLoading && <LoadingIndicator />}
       </div>
     );

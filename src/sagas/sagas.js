@@ -3,7 +3,7 @@
  *
  * Distributed under terms of the BSD 2-Clause license.
  */
-import { call, fork, put, takeLatest } from 'redux-saga/effects';
+import { call, fork, put, throttle } from 'redux-saga/effects';
 
 import Api from '../services/api';
 import actions from '../actions';
@@ -27,5 +27,5 @@ export function* fetchFeed({ isLoading }) {
 }
 
 export default function* rootSaga() {
-  yield takeLatest(actions.FETCH_FEED, fetchFeed);
+  yield throttle(8000, actions.FETCH_FEED, fetchFeed);
 }
