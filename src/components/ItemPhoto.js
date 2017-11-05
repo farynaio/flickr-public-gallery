@@ -8,8 +8,9 @@ import PropTypes from 'prop-types';
 
 const ItemPhoto = ({ title, author, photoLink, authorLink }) => (
   <div className='item-photo'>
-    <img src={photoLink} className='item-photo__img' alt={title} />
+    <div src={photoLink} className='item-photo__img' style={{ backgroundImage: `url(${photoLink})`}} />
     <a href={photoLink} className='item-photo__title'>{title}</a>
+    <span>&nbsp;by&nbsp;</span>
     <a href={authorLink} className='item-photo__author'>{author}</a>
   </div>
 );

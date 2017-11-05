@@ -11,7 +11,10 @@ const Tags = ({ tags }) => {
 
   return (
     <div className='tags'>
-      {tagsElements}
+      <span>Tags:&nbsp;</span>
+      <div className='tags__container'>
+        {tagsElements}
+      </div>
     </div>
   );
 };

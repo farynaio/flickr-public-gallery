@@ -11,13 +11,13 @@ import ItemPhoto from './ItemPhoto';
 import Tags from './Tags';
 
 const StreamItem = props => {
-  const description = props.description ? sanitize(props.description) : '';
+  const description = props.description ?
+		<div className='stream-item__description' dangerouslySetInnerHTML={{ __html: sanitize(props.description) }} /> : <div className='stream-item__description'>&nbsp</div>;
 
   return (
     <div className='stream-item'>
       <ItemPhoto {...props} />
-      <div className='stream-item__description'
-        dangerouslySetInnerHTML={{ __html: description }} />
+			{description}
       <Tags tags={props.tags} />
     </div>
   );

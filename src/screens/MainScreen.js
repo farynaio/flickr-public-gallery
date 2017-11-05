@@ -13,7 +13,10 @@ class MainScreen extends Component {
     const {} = this.props;
 
     return (
-      <div className=''>
+      <div className='screen'>
+        <header className='screen__header'>
+          <h1>Flickr Public Feed</h1>
+        </header>
         <FeedLoader />
       </div>
     );
