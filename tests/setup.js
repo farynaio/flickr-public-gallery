@@ -8,6 +8,7 @@ require('babel-register');
 require('babel-polyfill');
 require('source-map-support/register');
 
+const { JSDOM } = require('jsdom');
 const chai = require('chai');
 const Adapter = require('enzyme-adapter-react-16');
 const enzyme = require('enzyme');
@@ -21,5 +22,26 @@ global.mount = enzyme.mount;
 global.render = enzyme.render;
 global.spy = sinon.spy;
 global.stub = sinon.stub;
+
+function copyProperties(src, target) {
+  const props = Object.keys(src)
+    .filter( key => typeof target[key] === 'undefined')
+    .reduce( (prev, key) => ({
+      ...prev,
+      [key]: Object.getOwnPropertyDescriptor(src, key)
+    }), {});
+  Object.defineProperties(target, props);
+}
+
+global.createDocument = function() {
+  const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+  global.document = jsdom.document;
+  global.window = jsdom.window;
+  global.navigator = {
+    userAgent: 'node.js'
+  };
+
+  copyProperties(jsdom.window, global);
+};
 
 ['.jpeg', '.jpg', '.png', '.gif', '.svg', '.css', '.scss'].forEach(item => require.extensions[item] = () => null);
