@@ -11,7 +11,7 @@ class Api {
 	static jsonp(path, options) {
 		return new Promise(
 				(resolve, reject) => jsonpWithCallback(`${API_BASE}${path}`, options,
-					(err, data) => err ? reject({ error }) : resolve({ data })));
+					(err, data) => err ? reject({ err }) : resolve({ data })));
 	}
 
   static fetchFeed() {
