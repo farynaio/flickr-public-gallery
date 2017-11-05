@@ -9,25 +9,27 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = require('./webpack/config.js');
 
+const extractSass = new ExtractTextPlugin({
+    filename: "[name].[contenthash].css",
+    disable: process.env.NODE_ENV === "development"
+});
+
 config.devtool = 'source-map';
 config.entry = [
   './src/index.js'
 ];
 
 config.plugins = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': "'production'"
+  }),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false,
       drop_console: false
     }
   }),
-  new ExtractTextPlugin({
-    filename: 'build.min.css',
-    allChunks: true
-  }),
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': "'production'"
-  }),
+	extractSass,
   new HtmlWebpackPlugin({
     template: './src/index.html',
     filename: 'index.html',
@@ -39,6 +41,22 @@ config.module.rules.push({
   test: /\.jsx?$/,
   exclude: /node_modules/,
   use: 'babel-loader'
+});
+
+config.module.rules.push({
+	test: /\.scss$/,
+	use: extractSass.extract({
+		use: [
+			{ loader: 'css-loader', options: { modules: true } },
+			{
+				loader: 'sass-loader',
+				options: {
+					includePaths: [ path.resolve(__dirname, '../src/styles')]
+				}
+			}
+		],
+		fallback: 'style-loader'
+	})
 });
 
 module.exports = config;

@@ -14,44 +14,18 @@ module.exports = {
   ],
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
   },
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.(jpe?g|png|gif|svg)$/,
         use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader', options: { modules: true } },
-          { loader: 'sass-loader' },
-        ]
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: [
-          { loader: 'url-loader', options: { limit: 8192, fallback: `responsive-loader?adapter=${sharp}` }},
           {
-            loader: 'img-loader',
+            loader: 'url-loader',
             options: {
-              enabled: process.env.NODE_ENV === 'production',
-              gifsicle: {
-                interlaced: false
-              },
-              mozjpeg: {
-                progressive: true,
-                arithmetic: false
-              },
-              optipng: false,
-              pngquant: {
-                floyd: 0.5,
-                speed: 2
-              },
-              svgo: {
-                plugins: [
-                  { removeTitle: true },
-                  { convertPathData: false }
-                ]
-              }
+              limit: 8192,
+              fallback: 'file-loader'
             }
           }
         ]

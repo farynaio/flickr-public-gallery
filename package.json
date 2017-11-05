@@ -6,8 +6,8 @@
   "license": "BSD-2-Clause",
   "scripts": {
     "start": "npm run dev",
-    "dev": "webpack-dev-server --progress --config webpack.dev.config.js",
-    "prod": "webpack --progress --config webpack.prod.config.js",
+    "dev": "webpack-dev-server --progress -d --config webpack.dev.config.js",
+    "prod": "webpack --progress -p --config webpack.prod.config.js",
     "test": "nyc mocha --require tests/setup.js --recursive src/tests/**/*.test.js",
     "test:debug": "mocha --inspect-brk --require tests/setup.js --recursive src/tests/**/*.test.js",
     "test:watch": "mocha --require tests/setup.js -w --recursive src/tests/**/*.test.js"
@@ -45,6 +45,7 @@
     "img-loader": "^2.0.0",
     "jsdom": "^11.3.0",
     "mocha": "^4.0.1",
+    "node-sass": "^4.6.0",
     "nyc": "^11.2.1",
     "react-hot-loader": "^3.1.1",
     "react-test-renderer": "^16.0.0",
