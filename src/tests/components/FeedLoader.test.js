@@ -7,9 +7,14 @@ import React from 'react';
 
 import FeedLoader from '../../components/FeedLoader';
 import StreamItem from '../../components/StreamItem';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 describe('FeedLoader', () => {
   let items;
+
+  before(() => {
+    createDocument();
+  });
 
   beforeEach(() => {
     items = [
@@ -32,8 +37,8 @@ describe('FeedLoader', () => {
     ];
   });
 
-  it('should not render any elements for not specified prop "item"', () => {
-    expect(shallow(<FeedLoader fetchFeed={function(){}} />).children()).to.have.length(0);
+  it('should not render any elements when not specified prop "item"', () => {
+    expect(shallow(<FeedLoader fetchFeed={()=>({})} />).children(<StreamItem {...items[0]} />)).to.have.length(0);
   });
 
   it('should render 5 elements StreamItems for 5 items in props', () => {

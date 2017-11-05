@@ -5,21 +5,19 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Rx from 'rxjs/Rx';
+import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
 import StreamItem from './StreamItem';
 import LoadingIndicator from './LoadingIndicator';
 
 class FeedLoader extends Component {
   static defaultProps = {
-    items: [],
-    isWrapped: false
+    items: []
   }
 
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object),
-    fetchFeed: PropTypes.func.isRequired,
-    isWrapped: PropTypes.bool
+    fetchFeed: PropTypes.func.isRequired
   }
 
 	constructor(props) {
@@ -37,7 +35,7 @@ class FeedLoader extends Component {
 		const { isLoading } = this.state;
     const that = this;
 
-		this.observables.isLoading = new Rx.BehaviorSubject(isLoading);
+		this.observables.isLoading = new BehaviorSubject(isLoading);
     this.subscriptions.isLoading = this.observables.isLoading
       .subscribe( isLoading => that.setState({ isLoading }) );
 
@@ -48,16 +46,15 @@ class FeedLoader extends Component {
 
 	componentDidMount() {
     const that = this;
-		const { fetchFeed, isWrapped } = this.props;
+		const { fetchFeed } = this.props;
 
-		let listener = isWrapped ?
-      this.node.parentNode : document.getElementById('root') || document.body;
+		let listener = document.getElementById('root') || document.body;
 
     function shouldFetchMoreData() {
       return this.node.scrollHeight - listener.scrollTop - listener.clientHeight >= -100;
     }
 
-		this.observables.scroll = Rx.Observable.fromEvent(window, 'scroll')
+		this.observables.scroll = Observable.fromEvent(window, 'scroll')
 			.debounceTime(300)
       .filter(shouldFetchMoreData.bind(this));
 

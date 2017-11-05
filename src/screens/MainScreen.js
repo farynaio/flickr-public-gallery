@@ -14,7 +14,7 @@ class MainScreen extends Component {
 
     return (
       <div className=''>
-        <FeedLoader isWrapped={false} />
+        <FeedLoader />
       </div>
     );
   };

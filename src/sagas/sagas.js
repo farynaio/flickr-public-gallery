@@ -27,6 +27,5 @@ export function* fetchFeed({ isLoading }) {
 }
 
 export default function* rootSaga() {
-  yield fork(console.log, 'rootSaga');
   yield takeLatest(actions.FETCH_FEED, fetchFeed);
 }
