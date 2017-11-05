@@ -7,17 +7,16 @@ import jsonpWithCallback from 'jsonp';
 
 const API_BASE = 'https://api.flickr.com/services';
 
-function jsonp(path, options) {
-	return new Promise(
-			(resolve, reject) => jsonpWithCallback(`${API_BASE}${path}`, options,
-				(err, data) => err ? reject({ error }) : resolve({ data })));
-}
-
 class Api {
+	static jsonp(path, options) {
+		return new Promise(
+				(resolve, reject) => jsonpWithCallback(`${API_BASE}${path}`, options,
+					(err, data) => err ? reject({ error }) : resolve({ data })));
+	}
 
-  fetchFeed() {
-    return jsonp('/feeds/photos_public.gne?format=json', { name: 'jsonFlickrFeed' });
+  static fetchFeed() {
+    return Api.jsonp('/feeds/photos_public.gne?format=json', { name: 'jsonFlickrFeed' });
   }
 }
 
-export default new Api;
+export default Api;

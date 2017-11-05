@@ -5,10 +5,11 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import indicator from '../assets/loading_icon.gif';
 
 const LoadingIndicator = () => (
   <div className='loading-indicator'>
-    <img src={require('../assets/loading_icon.gif')} />
+    <img src={indicator} />
   </div>
 );
 

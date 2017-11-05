@@ -5,30 +5,80 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Rx from 'rxjs/Rx';
 
-import StreamItem from './StreamItem'
+import StreamItem from './StreamItem';
+import LoadingIndicator from './LoadingIndicator';
 
 class FeedLoader extends Component {
   static defaultProps = {
-    items: []
+    items: [],
+    isWrapped: false
   }
 
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object),
-    fetchFeed: PropTypes.func.isRequired
+    fetchFeed: PropTypes.func.isRequired,
+    isWrapped: PropTypes.bool
   }
 
+	constructor(props) {
+		super(props);
+
+    this.observables = {};
+    this.subscriptions = {};
+		this.state = {
+			isLoading: !this.props.items.length
+		}
+	}
+
   componentWillMount() {
-    this.props.fetchFeed();
+    const { fetchFeed, items } = this.props;
+		const { isLoading } = this.state;
+    const that = this;
+
+		this.observables.isLoading = new Rx.BehaviorSubject(isLoading);
+    this.subscriptions.isLoading = this.observables.isLoading
+      .subscribe( isLoading => that.setState({ isLoading }) );
+
+    if (!items.length) {
+      fetchFeed(this.observables.isLoading);
+    }
   }
+
+	componentDidMount() {
+    const that = this;
+		const { fetchFeed, isWrapped } = this.props;
+
+		let listener = isWrapped ?
+      this.node.parentNode : document.getElementById('root') || document.body;
+
+    function shouldFetchMoreData() {
+      return this.node.scrollHeight - listener.scrollTop - listener.clientHeight >= -100;
+    }
+
+		this.observables.scroll = Rx.Observable.fromEvent(window, 'scroll')
+			.debounceTime(300)
+      .filter(shouldFetchMoreData.bind(this));
+
+    this.subscriptions.scroll = this.observables.scroll
+			.subscribe( () => fetchFeed(that.observables.isLoading) );
+	}
+
+	componentWillUnmount() {
+    Object.values(this.subscriptions).forEach( subscription => subscription.unsubscribe() );
+	}
 
   render() {
     const { items } = this.props;
+		const { isLoading } = this.state;
+
     const childs = items.map( (item, idx) => <StreamItem key={idx} {...item} />);
 
     return (
-      <div className='feed-loader'>
+      <div className='feed-loader' ref={ node => this.node = node }>
         {childs}
+				{isLoading && <LoadingIndicator />}
       </div>
     );
   };

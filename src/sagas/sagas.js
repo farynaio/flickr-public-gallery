@@ -3,29 +3,30 @@
  *
  * Distributed under terms of the BSD 2-Clause license.
  */
-import { call, put, takeEvery, takeLatest, select } from 'redux-saga/effects';
+import { call, fork, put, takeLatest } from 'redux-saga/effects';
 
 import Api from '../services/api';
 import actions from '../actions';
 
-export function* fetchFeed() {
+export function* fetchFeed({ isLoading }) {
   try {
+    if (isLoading) {
+      yield fork([isLoading, isLoading.next], true);
+    }
+
     const response = yield call(Api.fetchFeed);
     if (response.error) throw response.error;
     yield put(actions.fetchFeedSuccess(response.data));
   } catch (err) {
     yield put(actions.fetchFeedFail(err));
-  }
-}
-
-export function* lazyFetchFeed() {
-  const { feed } = yield select();
-  if (!feed.size) {
-    yield call(fetchFeed);
+  } finally {
+    if (isLoading) {
+      yield fork([isLoading, isLoading.next], false);
+    }
   }
 }
 
 export default function* rootSaga() {
-  yield takeEvery(actions.FETCH_FEED, fetchFeed);
-  yield takeLatest(actions.LAZY_FETCH_FEED, lazyFetchFeed);
+  yield fork(console.log, 'rootSaga');
+  yield takeLatest(actions.FETCH_FEED, fetchFeed);
 }

@@ -6,10 +6,13 @@
 export const FETCH_FEED = 'FETCH_FEED';
 export const FETCH_FEED_SUCCESS = 'FETCH_FEED_SUCCESS';
 export const FETCH_FEED_FAIL = 'FETCH_FEED_FAIL';
-export const LAZY_FETCH_FEED = 'LAZY_FETCH_FEED';
 
-export const fetchFeed = () => ({ type: FETCH_FEED });
-export const lazyFetchFeed = () => ({ type: LAZY_FETCH_FEED });
+export const fetchFeed = isLoading => ({
+  type: FETCH_FEED,
+  payload: {
+    observables: { isLoading }
+  }
+});
 
 export const fetchFeedSuccess = feed => ({
   type: FETCH_FEED_SUCCESS,
@@ -17,7 +20,7 @@ export const fetchFeedSuccess = feed => ({
 });
 
 export const fetchFeedFail = err => {
-  if(process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     console.error(err);
   }
   return { type: FETCH_FEED_FAIL };

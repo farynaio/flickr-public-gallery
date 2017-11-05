@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchFeed: () => dispatch(actions.lazyFetchFeed())
+  fetchFeed: loadingObservable => dispatch(actions.fetchFeed(loadingObservable))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedLoader);
