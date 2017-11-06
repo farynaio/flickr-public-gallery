@@ -10,27 +10,32 @@ Technologies used: React, Redux, Redux Saga, Rx.js, Webpack, Sass, Express, Node
 
 It displays content of [Flicker Public Photo Feed](https://www.flickr.com/services/feeds/docs/photos_public/) in infinite scroll. When user browse through content, new content is simultaneously delivered making an illusion of infinity.
 
-## How to run it
+## How to run it?
 
 Project is heroku ready. You can push it to your heroku account and it should work well. Before pushing to Heroku, make sure you build production bundle as described below.
 
-### To run tests
+This application requires installed [Node.js](https://nodejs.org).
 
-Install dependencies:
-```npm i```
+This step is necessary for any further interaction with an app:
+
+```npm install```
+
+### To run tests
 
 Run tests & coverage:
 ``` npm test ```
 
-### To run in dev mode:
+### To run in dev mode
 
 ``` npm start ```
 
-### To build production bundle:
+### To build production bundle
 
 ``` npm run prod ```
 
-## What could be done better:
+After that you can open './dist/index.html' directly from your web browser or run ``` node server.js ``` and open http://localhost:5000 in your web browser.
+
+## Ideas for improvement
 
 * Fancier look & feel.
 * Better, easier to maintain webpack config that combines dev and prod environments.
