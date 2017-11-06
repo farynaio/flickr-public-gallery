@@ -5,11 +5,11 @@
  */
 import React from 'react';
 
-import StreamItem from '../../components/StreamItem';
-import ItemPhoto from '../../components/ItemPhoto';
+import FeedItem from '../../components/FeedItem';
+import FeedPhoto from '../../components/FeedPhoto';
 import Tags from '../../components/Tags';
 
-describe('StreamItem component', () => {
+describe('FeedItem component', () => {
   let item;
   let wrapper;
 
@@ -25,15 +25,15 @@ describe('StreamItem component', () => {
   });
 
   beforeEach(() => {
-    wrapper = shallow(<StreamItem {...item} />);
+    wrapper = shallow(<FeedItem {...item} />);
   });
 
-  it('should contain ItemPhoto component', () => {
-    expect(wrapper.contains(<ItemPhoto {...item} />)).to.be.true;
+  it('should contain FeedPhoto component', () => {
+    expect(wrapper.contains(<FeedPhoto {...item} />)).to.be.true;
   });
 
   it('should contain description', () => {
-    expect(wrapper.children('.stream-item__description')).to.have.length(1);
+    expect(wrapper.children('.feed-loader__feed-item__description')).to.have.length(1);
   });
 
   it('should contain ItemTags component', () => {

@@ -14,7 +14,7 @@
 .screen {
   .screen__header {
     text-align: center;
-    font-size: 50px;
+    font-size: $base__screen__header__font-size;
     font-weight: bold;
     margin: 20px 0;
   }
@@ -30,7 +30,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     align-content: flex-start;
-    min-height: 300px;
+    min-height: $base__feed-loader__items__min-height;
   }
 
   .feed-loader__items > * {
@@ -38,36 +38,37 @@
   }
 }
 
-.stream-item {
-  border: 1px solid #000;
+.feed-item {
+  border: 1px solid $base__feed-item__border-color;
   border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: $base__feed-item__box-shadow;
   padding: 5px;
   margin: 5px;
   width: auto;
 
-  .stream-item__description {
+  .feed-item__description {
     line-height: 25px;
     height: 50px;
     overflow-y: auto;
   }
-}
 
-.item-photo {
-  width: auto;
-
-  .item-photo__img {
-    display: block;
+  .feed-item__feed-photo {
     width: auto;
-    height: 400px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
 
-  .item-photo__title, .item-photo__author {
-    word-break: break-all;
-    word-wrap: break-word;
-    line-height: 20px;
+    .feed-item__feed-photo__img {
+      display: block;
+      width: auto;
+      height: 400px;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    .feed-item__feed-photo__title,
+    .feed-item__feed-photo__author {
+      word-break: break-all;
+      word-wrap: break-word;
+      line-height: 20px;
+    }
   }
 }
 
@@ -76,16 +77,16 @@
 
   .tags__container {
     display: inline;
-  }
 
-  .tags__tag {
-    display: inline-block;
-    font-size: 15px;
-    background-color: $base__tag__background-color;
-    color: #fff;
-    margin: 0 5px;
-    padding: 0 7px;
-    border-radius: 10px;
+		.tags__tag {
+			display: inline-block;
+			font-size: $base__tags__tag__font-size;
+			background-color: $base__tags__tag__bg-color;
+			color: $base__tags__tag-color;
+			margin: 0 5px;
+			padding: 0 7px;
+			border-radius: 10px;
+		}
   }
 }
 

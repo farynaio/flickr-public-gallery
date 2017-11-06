@@ -7,27 +7,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import sanitize from 'sanitize-html';
 
-import ItemPhoto from './ItemPhoto';
+import FeedPhoto from './FeedPhoto';
 import Tags from './Tags';
 
-const StreamItem = props => {
+const FeedItem = props => {
   const description = props.description ?
-		<div className='stream-item__description' dangerouslySetInnerHTML={{ __html: sanitize(props.description) }} /> : <div className='stream-item__description'>&nbsp</div>;
+		<div className='feed-item__description' dangerouslySetInnerHTML={{ __html: sanitize(props.description) }} /> : <div className='feed-item__description'>&nbsp</div>;
 
   return (
-    <div className='stream-item'>
-      <ItemPhoto {...props} />
+    <div className='feed-item'>
+      <FeedPhoto {...props} />
 			{description}
       <Tags tags={props.tags} />
     </div>
   );
 };
 
-StreamItem.defaultProps = {
+FeedItem.defaultProps = {
   tags: []
 };
 
-StreamItem.propTypes = {
+FeedItem.propTypes = {
   title: PropTypes.string.isRequired,
   photoLink: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
@@ -36,4 +36,4 @@ StreamItem.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string)
 };
 
-export default StreamItem;
+export default FeedItem;

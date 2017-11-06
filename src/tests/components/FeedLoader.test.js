@@ -6,7 +6,7 @@
 import React from 'react';
 
 import FeedLoader from '../../components/FeedLoader';
-import StreamItem from '../../components/StreamItem';
+import FeedItem from '../../components/FeedItem';
 import LoadingIndicator from '../../components/LoadingIndicator';
 
 describe('FeedLoader', () => {
@@ -38,11 +38,11 @@ describe('FeedLoader', () => {
   });
 
   it('should not render any elements when not specified prop "item"', () => {
-    expect(shallow(<FeedLoader fetchFeed={()=>({})} />).children(<StreamItem {...items[0]} />)).to.have.length(0);
+    expect(shallow(<FeedLoader fetchFeed={()=>({})} />).children(<FeedItem {...items[0]} />)).to.have.length(0);
   });
 
-  it('should render 5 elements StreamItems for 5 items in props', () => {
-    const expected = items.map( (item, idx) => <StreamItem key={idx} {...item} />);
+  it('should render 5 elements FeedItems for 5 items in props', () => {
+    const expected = items.map( (item, idx) => <FeedItem key={idx} {...item} />);
     expect(shallow(<FeedLoader fetchFeed={function(){}} items={items} />).containsAllMatchingElements(expected)).to.be.true;
   });
 });

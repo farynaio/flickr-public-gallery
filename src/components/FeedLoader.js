@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
-import StreamItem from './StreamItem';
+import FeedItem from './FeedItem';
 import LoadingIndicator from './LoadingIndicator';
 
 class FeedLoader extends Component {
@@ -70,7 +70,7 @@ class FeedLoader extends Component {
     const { items } = this.props;
 		const { isLoading } = this.state;
 
-    const childs = items.map( (item, idx) => <StreamItem key={idx} {...item} />);
+    const childs = items.map( (item, idx) => <FeedItem key={idx} {...item} />);
 
     return (
       <div className='feed-loader'>
