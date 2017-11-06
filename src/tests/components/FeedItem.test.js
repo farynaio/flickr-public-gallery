@@ -33,7 +33,7 @@ describe('FeedItem component', () => {
   });
 
   it('should contain description', () => {
-    expect(wrapper.children('.feed-loader__feed-item__description')).to.have.length(1);
+    expect(wrapper.children('.feed-item__description')).to.have.length(1);
   });
 
   it('should contain ItemTags component', () => {
