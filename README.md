@@ -30,10 +30,12 @@ Build production bundle:
 
 ## What could be done better:
 
-* Fancier look && feel.
+* Fancier look & feel.
 * Better, easier to maintain webpack config that combines dev and prod environments.
 * Probably better image scaling policy.
 * Probably better Sass structure.
+* Add ESlint config, probably based on Airbnb.
+* Add Webpack hot module replacement support in dev mode.
 
 ## Contribution
 
