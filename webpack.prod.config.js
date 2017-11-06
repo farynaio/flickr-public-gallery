@@ -4,8 +4,10 @@
  * Distributed under terms of the BSD 2-Clause license.
  */
 const webpack = require('webpack');
+const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 const config = require('./webpack/config.js');
 
@@ -23,11 +25,10 @@ config.plugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': "'production'"
   }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false,
-      drop_console: false
-    }
+	new UglifyJSPlugin({
+    test: /\.js($|\?)/i,
+    parallel: true,
+    sourceMap: true
   }),
 	extractSass,
   new HtmlWebpackPlugin({
