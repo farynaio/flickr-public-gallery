@@ -19,13 +19,15 @@ Project is heroku ready. You can push it to your heroku account and it should wo
 Install dependencies:
 ```npm i```
 
-Run webpack-dev-server:
-``` npm start ```
-
 Run tests & coverage:
 ``` npm test ```
 
-Build production bundle:
+### To run in dev mode:
+
+``` npm start ```
+
+### To build production bundle:
+
 ``` npm run prod ```
 
 ## What could be done better:
