@@ -20,9 +20,8 @@ This step is necessary for any further interaction with an app:
 
 ```npm install```
 
-### To run tests
+### To run tests & coverage
 
-Run tests & coverage:
 ``` npm test ```
 
 ### To run in dev mode
